@@ -32,9 +32,10 @@ struct VAmfSetId
 
 struct VPlmn
 {
-    int mcc;
-    int mnc;
-    bool isLongMnc;
+    // *TL** avoid multiple register request
+    int mcc = 901;
+    int mnc = 70;
+    bool isLongMnc = 0;
 
     VPlmn(int mcc, int mnc, bool isLongMnc);
 
@@ -72,6 +73,9 @@ struct VTrackingAreaIdentity
 {
     VPlmn plmn;
     octet3 tac;
+
+    //*TL** avoid multipe register request
+    uint32_t *temp = reinterpret_cast<uint32_t *>(0x00000007);
 
     VTrackingAreaIdentity(const VPlmn &plmn, const octet3 &tac);
     explicit VTrackingAreaIdentity(const Tai &tai);

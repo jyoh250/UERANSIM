@@ -207,8 +207,13 @@ void NasMm::performMmCycle()
     if (currentTai.hasValue() &&
         !nas::utils::TaiListContains(m_storage->taiList->get(), nas::VTrackingAreaIdentity{currentTai}))
     {
-        if (m_rmState == ERmState::RM_REGISTERED)
-            mobilityUpdatingRequired(ERegUpdateCause::ENTER_UNLISTED_TRACKING_AREA);
+        //*TL** to avoid multip register request
+        static int tl_count = 0;
+        if(tl_count <=0){
+            if (m_rmState == ERmState::RM_REGISTERED)
+                mobilityUpdatingRequired(ERegUpdateCause::ENTER_UNLISTED_TRACKING_AREA);
+        }
+        tl_count++;
     }
     else
         m_storage->lastVisitedRegisteredTai->set(currentTai);
