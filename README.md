@@ -14,7 +14,7 @@ testing 5G Core Network and studying 5G System.
 UERANSIM introduces the world's first and only open source 5G-SA UE and gNodeB implementation.
 Some parts of this software are patent pending.
 
-## Additional feature for View
+## Additional Feature for View
 
 Configuration files
 Shell scripts
